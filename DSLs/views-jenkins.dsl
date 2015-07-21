@@ -22,4 +22,8 @@ nestedView('Jenkins-DSL') {
       }
     }
   }
+  columns {
+    status ()
+    weather ()
+  }
 }
