@@ -74,4 +74,8 @@ nestedView('Puppet-DSL') {
       }
     }
   }
+  columns {
+    status ()
+    weather ()
+  }
 }
