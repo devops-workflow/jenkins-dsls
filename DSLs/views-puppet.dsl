@@ -8,6 +8,15 @@ nestedView('Puppet-DSL') {
     }
     listView('Puppet') {
       description('Misc Puppet Jobs')
+      columns {
+        status ()
+        weather ()
+        name ()
+        lastSuccess ()
+        lastFailure ()
+        lastDuration ()
+        buildButton ()
+      }
     }
     listView('Puppet Modules') {
       description('Puppet module jobs')
@@ -17,6 +26,15 @@ nestedView('Puppet-DSL') {
           matchValue(RegexMatchValue.NAME)
           regex('Puppet_Module_.*')
         }
+      }
+      columns {
+        status ()
+        weather ()
+        name ()
+        lastSuccess ()
+        lastFailure ()
+        lastDuration ()
+        buildButton ()
       }
     }
     categorizedJobsView('Categories') {
@@ -31,6 +49,15 @@ nestedView('Puppet-DSL') {
       categorizationCriteria {
         regexGroupingRule('Puppet_(Module|Template)_(.*)','Puppet $1')
       }
+      columns {
+        status ()
+        weather ()
+        categorizedJob ()
+        lastSuccess ()
+        lastFailure ()
+        lastDuration ()
+        buildButton ()
+      }
     }
     nestedView('Pipelines') {
       description('Puppet Job Pipelines')
@@ -41,6 +68,9 @@ nestedView('Puppet-DSL') {
       description('Puppet Job Templates')
       jobs {
         regex('Puppet_Template_.*')
+      }
+      columns {
+        name ()
       }
     }
   }
