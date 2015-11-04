@@ -19,12 +19,17 @@ nestedView('Puppet-DSL') {
       }
     }
     listView('Puppet Control') {
-      description('Puppet control (r10k) jobs')
+      description('Puppet control (r10k) branch jobs')
       jobFilters {
         regex {
           matchType(MatchType.INCLUDE_MATCHED)
           matchValue(RegexMatchValue.NAME)
           regex('Puppet_Control-.*')
+        }
+        regex {
+          matchType(MatchType.EXCLUDE_MATCHED)
+          matchValue(RegexMatchValue.NAME)
+          regex('.*Template.*')
         }
       }
       columns {
