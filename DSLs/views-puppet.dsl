@@ -18,6 +18,25 @@ nestedView('Puppet-DSL') {
         buildButton ()
       }
     }
+    listView('Puppet Control') {
+      description('Puppet control (r10k) jobs')
+      jobFilters {
+        regex {
+          matchType(MatchType.INCLUDE_MATCHED)
+          matchValue(RegexMatchValue.NAME)
+          regex('Puppet_Control-.*')
+        }
+      }
+      columns {
+        status ()
+        weather ()
+        name ()
+        lastSuccess ()
+        lastFailure ()
+        lastDuration ()
+        buildButton ()
+      }
+    }
     listView('Puppet Modules') {
       description('Puppet module jobs')
       jobFilters {
@@ -67,7 +86,7 @@ nestedView('Puppet-DSL') {
     listView('Templates') {
       description('Puppet Job Templates')
       jobs {
-        regex('Puppet_Template_.*')
+        regex('Puppet.*[_-]Template(_.*|$)')
       }
       columns {
         name ()
