@@ -24,7 +24,7 @@ nestedView('Puppet-DSL') {
         regex {
           matchType(MatchType.INCLUDE_MATCHED)
           matchValue(RegexMatchValue.NAME)
-          regex('Puppet_Control-.*')
+          regex('Puppet_Control[_-].*')
         }
         regex {
           matchType(MatchType.EXCLUDE_MATCHED)
