@@ -21,6 +21,15 @@ nestedView('Jenkins-DSL') {
       views {
       }
     }
+    listView('Templates') {
+      description('Generic Templates')
+      jobs {
+        regex('Template[-_].*')
+      }
+      columns {
+        name ()
+      }
+    }
   }
   columns {
     status ()
