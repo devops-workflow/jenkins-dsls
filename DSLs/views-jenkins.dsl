@@ -30,6 +30,21 @@ nestedView('Jenkins-DSL') {
         name ()
       }
     }
+    listView('Tools') {
+      description('Job for installing testing tools')
+      jobs {
+        regex('Test-Tools-.*')
+      }
+      columns {
+        status ()
+        weather ()
+        name ()
+        lastSuccess ()
+        lastFailure ()
+        lastDuration ()
+        buildButton ()
+      }
+    }
   }
   columns {
     status ()
