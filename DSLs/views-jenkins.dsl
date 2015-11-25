@@ -31,9 +31,9 @@ nestedView('Jenkins-DSL') {
       }
     }
     listView('Tools') {
-      description('Job for installing testing tools')
+      description('Jobs for installing testing tools')
       jobs {
-        regex('Test-Tools-.*')
+        regex('(Test-)?Tools?-.*')
       }
       columns {
         status ()
