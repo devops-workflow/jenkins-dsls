@@ -4,6 +4,33 @@ nestedView('Puppet-DSL') {
     nestedView('Metrics') {
       description('Puppet Job Metrics')
       views {
+        dashboardView('All') {
+        jobFilters {
+          regex {
+            matchType(MatchType.INCLUDE_MATCHED)
+            matchValue(RegexMatchValue.NAME)
+            regex('Puppet_.*')
+          }
+        }
+        columns {
+          status ()
+          weather ()
+          name ()
+          lastSuccess ()
+          lastFailure ()
+          lastDuration ()
+          buildButton ()
+        }
+        topPortlets {
+          testStatisticsChart {
+            displayName('Puppet Statistics')
+          }
+        }
+        bottomPortlets {
+          testStatisticsGrid {
+            displayName('Puppet Statistics')
+          }
+        }
       }
     }
     listView('Puppet') {
