@@ -32,7 +32,6 @@ nestedView('Puppet-DSL') {
               displayName('Puppet Test Statistics')
               skippedColor('7F7F7F')
               failureColor('FF0000')
-              successColor('00FF00')
             }
           }
         }
