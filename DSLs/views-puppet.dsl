@@ -5,6 +5,7 @@ nestedView('Puppet-DSL') {
       description('Puppet Job Metrics')
       views {
         dashboardView('All') {
+          description('All Puppet Jobs')
           jobFilters {
             regex {
               matchType(MatchType.INCLUDE_MATCHED)
@@ -23,12 +24,15 @@ nestedView('Puppet-DSL') {
           }
           topPortlets {
             testStatisticsChart {
-              displayName('Puppet Statistics')
+              displayName('Puppet Test Statistics')
             }
           }
           bottomPortlets {
             testStatisticsGrid {
-              displayName('Puppet Statistics')
+              displayName('Puppet Test Statistics')
+              skippedColor('7F7F7F')
+              failureColor('FF0000')
+              successColor('00FF00')
             }
           }
         }
