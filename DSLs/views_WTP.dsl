@@ -41,6 +41,10 @@ nestedView('WTP-DSL') {
           showPipelineDefinitionHeader()
         }
       }
+      columns {
+        status ()
+        weather ()
+      }
     }
   }
   columns {
