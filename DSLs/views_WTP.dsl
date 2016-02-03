@@ -24,6 +24,14 @@ nestedView('WTP-DSL') {
     nestedView('Workflows') {
       description('WTP Workflows/Pipelines')
       views {
+        buildPipelineView('HAProxy') {
+          description('WTP HAProxy workflow')
+          title('WTP HAProxy')
+          displayedBuilds(5)
+          refreshFrequency(60)
+          selectedJob('WTP-haproxy_analysis')
+          showPipelineDefinitionHeader()
+        }
         buildPipelineView('WX') {
           description('WTP WX workflow')
           title('WTP WX')
