@@ -21,6 +21,19 @@ nestedView('WTP-DSL') {
       views {
       }
     }
+    nestedView('Workflows') {
+      description('WTP Workflows/Pipelines')
+      views {
+        buildPipelineView('WX') {
+          description('WTP WX workflow')
+          title('WTP WX')
+          displayedBuilds(5)
+          refreshFrequency(60)
+          selectedJob('WTP-WX_analysis')
+          showPipelineDefinitionHeader()
+        }
+      }
+    }
   }
   columns {
     status ()
