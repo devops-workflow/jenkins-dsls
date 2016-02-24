@@ -1,3 +1,16 @@
+def pipelineView (viewInst, project, desc, job) {
+  viewInst.with {
+    buildPipelineView(desc) {
+      description("${project} ${desc} workflow")
+      title("${project} ${desc}")
+      displayedBuilds(5)
+      refreshFrequency(60)
+      selectedJob("${project}-${job}")
+      showPipelineDefinitionHeader()
+    }
+  }
+}
+
 nestedView('WTP-DSL') {
   description('Everything related to WTP')
   views {
@@ -21,9 +34,31 @@ nestedView('WTP-DSL') {
       views {
       }
     }
+    nestedView('Workflows-Verify') {
+      description('WTP Workflows/Pipelines')
+      def view = views {}
+      pipelineView(view, 'VERIFY', 'API Service', 'fe-api-service_analysis')
+      pipelineView(view, 'VERIFY', 'Messaging', 'fe-messaging_analysis')
+      pipelineView(view, 'VERIFY', 'Portal App', 'fe-portal-app_analysis_NodeJS')
+      pipelineView(view, 'VERIFY', 'Portal Services', 'fe-portal-services_analysis')
+      pipelineView(view, 'VERIFY', 'Spark Analytics', 'fe-spark-analytics_analysis')
+      pipelineView(view, 'VERIFY', 'HAProxy', 'haproxy_analysis_C')
+      pipelineView(view, 'VERIFY', 'WX', 'wx_analysis_C')
+      columns {
+        status ()
+        weather ()
+      }
+    }
     nestedView('Workflows') {
       description('WTP Workflows/Pipelines')
       views {
+        // pipelineView('WTP', 'API Service', 'api-service_analysis')
+        // pipelineView('WTP', 'HAProxy', 'haproxy_analysis')
+        // pipelineView('WTP', 'Messaging', 'fe-messaging_analysis')
+        // pipelineView('WTP', 'Portal App', 'fe-portal-app_analysis')
+        // pipelineView('WTP', 'Portal Services', 'fe-portal-services_analysis')
+        // pipelineView('WTP', 'Spark Analytics', 'fe-spark-analytics_analysis')
+        // pipelineView('WTP', 'WX', 'WX_analysis')
         buildPipelineView('API Service') {
           description('WTP API Service workflow')
           title('WTP API Service')
