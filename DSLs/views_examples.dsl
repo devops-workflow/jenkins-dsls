@@ -1,5 +1,8 @@
 // View tree to show examples of all job and view types
 
+// View types:
+//   buildMonitor, buildPipeline, categorizedJobs, dashboard, deliveryPipeline, list, nested, sectioned
+
 nestedView('Examples') {
   description('Examples of view and job types')
   views {
@@ -7,7 +10,7 @@ nestedView('Examples') {
       description('Build Monitor View Example')
       jobs {
         name('Jobs')
-        regex(/.*/)
+        regex(/Example-.*/)
       }
     }
     buildPipelineView('Build Pipeline') {
@@ -26,7 +29,7 @@ nestedView('Examples') {
         regex {
           matchType(MatchType.INCLUDE_MATCHED)
           matchValue(RegexMatchValue.NAME)
-          regex('.*')
+          regex('Example-.*')
         }
       }
       //categorizationCriteria {
@@ -48,7 +51,7 @@ nestedView('Examples') {
         regex {
           matchType(MatchType.INCLUDE_MATCHED)
           matchValue(RegexMatchValue.NAME)
-          regex('.*')
+          regex('Example-.*')
         }
       }
       columns {
@@ -87,13 +90,13 @@ nestedView('Examples') {
       pipelines {
         component('Sub System A', 'compile-a')
         component('Sub System B', 'compile-b')
-        regex(/compile-subsystem-(.*)/)
+        regex(/Example-(.*)/)
       }
     }
     listView('List') {
       description('List View Example')
       jobs {
-        regex('.*')
+        regex('Example-.*')
       }
       columns {
         status ()
@@ -105,22 +108,6 @@ nestedView('Examples') {
         lastDuration ()
         buildButton ()
       }
-    }
-    // Change to list or dashboard ?
-    nestedView('Jobs') {
-      description('Job Type Examples')
-      views {
-      }
-      // Job Types:
-      //buildFlowJob('Build Flow') {}
-      //freeStyleJob('Freestyle') {}
-      //ivyJob('Ivy') {}
-      //job('Freestyle') {}
-      //matrixJob('Matrix') {}
-      //mavenJob('Maven') {}
-      //multibranchPipelineJob('Multi Branch Pipeline') {}
-      //multiJob('Multi Job') {}
-      //pipelineJob('Pipeline') {}
     }
     //sectionedView('Sectioned') {}
   }
