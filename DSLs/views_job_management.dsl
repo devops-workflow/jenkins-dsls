@@ -31,14 +31,11 @@ nestedView('Job Management') {
       // Portlets available:
       // buildStatistics, jenkinsJobList, testStatisticsChart, testStatisticsGrid, testTrendChart
       topPortlets {
-        jenkinsJobList{
+        jenkinsJobsList {
           displayName('Unsuccessful jobs')
         }
       }
       leftPortlets {
-        jenkinsJobsList {
-          displayName('Jenkins Jobs List')
-        }
         testStatisticsChart {
           displayName('Test Statistics Chart')
         }
