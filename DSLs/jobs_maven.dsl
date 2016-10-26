@@ -160,6 +160,7 @@ def genMavenJob(Map args){
   downstreamJob = "${projData['project']}-${projData['repo']}_${projData['downstreamType']}_MavenJava"
   def jobM = mavenJob(jobName) {
     description("${projData['desc']}\nlint:ignore:HardcodedScriptChecker")
+    disabled()
     jdk(projData['jdkVer'])
     label(projData['label'])
     quietPeriod(10)
