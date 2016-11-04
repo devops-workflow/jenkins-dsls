@@ -1,5 +1,5 @@
 matrixJob('TEST-Matrix-Elastic') {
-  description('Test of matric job with ElasticAxis')
+  description('Test of matrix job with ElasticAxis')
   axes {
     configure { axes ->
       axes << 'org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis'() {
