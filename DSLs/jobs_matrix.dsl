@@ -15,8 +15,8 @@ def genInjectHome(jobInst) {
   jobInst.with {
     wrappers {
       environmentVariables {
-        script('''
-if [ -d "${JENKINS_HOME}" ]; then
+        script(
+'''if [ -d "${JENKINS_HOME}" ]; then
   # or [ "${NODE_NAME}" = "master" ]
   # Jenkins master
   HOME=${JENKINS_HOME}
@@ -71,8 +71,8 @@ matrixJob('TEST-Matrix-Elastic') {
 }
 */
 def genMatrixTools() {
-  def jobM = matrixJob('Jenkins-Tools-TEST') {
-    description('Setup tools on all nodes')
+  def jobM = matrixJob('Jenkins_Tools') {
+    description('Setup tools (scripts, configs, ...) on all nodes')
     axes {
       configure { axes ->
         axes << 'org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis'() {
@@ -94,9 +94,9 @@ def genMatrixTools() {
         branches('*/master')
       }
     }
-    //triggers {
-    //  scm('H/10 * * * *')
-    //}
+    triggers {
+      scm('H/10 * * * *')
+    }
     steps {
       shell('set +x && ./update-tools.sh')
     }
