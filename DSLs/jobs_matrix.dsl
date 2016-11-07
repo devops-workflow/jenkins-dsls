@@ -27,7 +27,7 @@ fi
 PATH=${PATH}:${HOME}/bin
 dirTmp='tmp'
 envVars="${dirTmp}/env.properties"
-mkdir -p tmp
+mkdir -p ${dirTmp}
 echo "HOME=${HOME}" > ${envVars}
 echo "PATH=${PATH}" >> ${envVars}''')
       }
@@ -103,7 +103,33 @@ def genMatrixTools() {
       scm('H/10 * * * *')
     }
     steps {
+      environmentVariables {
+        propertiesFile('tmp/env.properties')
+      }
       shell('set +x && ./update-tools.sh')
+      conditionalSteps {
+        condition {
+          //and {
+            //cause()
+            //status('SUCCESS')
+          shell('changed-file-git.sh tool-python-setup-new.sh')
+        }
+        runner('DontRun')
+        steps {
+          downstreamParameterized {
+            trigger('Tool-Python-Setup-Nodes-TEST') {
+              block {
+                buildStepFailure('FAILURE')
+                failure('FAILURE')
+                unstable('UNSTABLE')
+              }
+            //    parameters {
+            //      propertiesFile('parameters.properties', true)
+            //    }
+            }
+          }
+        }
+      }
     }
     wrappers {
       timeout {
@@ -138,7 +164,9 @@ def genMatrixPython() {
     properties {
       customIcon('tools.png')
     }
-    //triggers {}
+    triggers {
+      cron('@daily')
+    }
     steps {
       // TODO: ?? move Python setup into this job
       // Create repo with script, run script
@@ -146,13 +174,8 @@ def genMatrixPython() {
       environmentVariables {
         propertiesFile('tmp/env.properties')
       }
-      shell('''
-#set +x
-# Setup property file are parameters
-# FIX: This method limits the number of packages due to file name length
-#propFile=parameters.properties
-#echo "node=${label}" > ${propFile}
-#echo "python_ver=${PythonVer}" >> ${propFile}
+      shell('''#set +x
+# FIX: This method limits the number of packages due to file name length (axes)
 envArr=( ${VirtEnv} )
 #echo "python_ver=${envArr[0]}" >> ${propFile}
 #echo "venv=${envArr[1]}" >> ${propFile}
