@@ -136,29 +136,32 @@ def genMatrixPython() {
     //triggers {}
     steps {
       // TODO: ?? move Python setup into this job
+      // Create repo with script, run script
+      // remove downstream job
       shell('''
-set +x
+#set +x
 # Setup property file are parameters
 # FIX: This method limits the number of packages due to file name length
-propFile=parameters.properties
-echo "node=${label}" > ${propFile}
+#propFile=parameters.properties
+#echo "node=${label}" > ${propFile}
 #echo "python_ver=${PythonVer}" >> ${propFile}
 envArr=( ${VirtEnv} )
-echo "python_ver=${envArr[0]}" >> ${propFile}
-echo "venv=${envArr[1]}" >> ${propFile}
-echo "pkgs=${envArr[@]:2}" >> ${propFile}''')
-      downstreamParameterized {
-        trigger('Tool-Python') {
-          block {
-            buildStepFailure('FAILURE')
-            failure('FAILURE')
-            unstable('UNSTABLE')
-          }
-          parameters {
-            propertiesFile('parameters.properties', true)
-          }
-        }
-      }
+#echo "python_ver=${envArr[0]}" >> ${propFile}
+#echo "venv=${envArr[1]}" >> ${propFile}
+#echo "pkgs=${envArr[@]:2}" >> ${propFile}
+$HOME/tool-python-setup-new.sh -v ${envArr[0]} -e ${envArr[1]} -p "${envArr[@]:2}"''')
+      //downstreamParameterized {
+      //  trigger('Tool-Python') {
+      //    block {
+      //      buildStepFailure('FAILURE')
+      //      failure('FAILURE')
+      //      unstable('UNSTABLE')
+      //    }
+      //    parameters {
+      //      propertiesFile('parameters.properties', true)
+      //    }
+      //  }
+      //}
     }
     wrappers {
       timeout {
@@ -166,7 +169,6 @@ echo "pkgs=${envArr[@]:2}" >> ${propFile}''')
         failBuild()
       }
       timestamps()
-      // inject-home ?
     }
   }
   genInjectHome(jobM)
