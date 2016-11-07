@@ -142,6 +142,7 @@ def genMatrixTools() {
 def genMatrixPython() {
   def jobM = matrixJob('Tool-Python-Setup-Nodes-TEST') {
     description('Setup Python virtual environments on all nodes')
+    quietPeriod(15)
     axes {
       configure { axes ->
         axes << 'org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis'() {
