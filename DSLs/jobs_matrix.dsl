@@ -8,6 +8,27 @@
 //
 // General library routines
 //
+// TODO:
+//  routine for ElasticAxis
+
+def genInjectHome(jobInst) {
+  jobInst.with {
+    wrappers {
+      environmentVariables {
+        script('''
+if [ -d "${JENKINS_HOME}" ]; then
+  # or [ "${NODE_NAME}" = "master" ]
+  # Jenkins master
+  HOME=${JENKINS_HOME}
+else
+  # Jenkins build slave
+  HOME=${WORKSPACE%%/workspace*}
+fi
+PATH=${PATH}:${HOME}/bin''')
+      }
+    }
+  }
+}
 def genLogRotator(jobInst, numKeep, artifactKeep) {
   jobInst.with {
     logRotator {
@@ -86,9 +107,9 @@ def genMatrixTools() {
         failBuild()
       }
       timestamps()
-      // inject-home ?
     }
   }
+  genInjectHome(jobM)
   genLogRotator(jobM,10,5)
   genPragmaticProgrammer(jobM)
 }
@@ -96,8 +117,6 @@ def genMatrixTools() {
 def genMatrixPython() {
   def jobM = matrixJob('Tool-Python-Setup-Nodes-TEST') {
     description('Setup Python virtual environments on all nodes')
-    // CustomIcon: Tool-Python-Setup-Nodes
-    // Trigger: ?
     axes {
       configure { axes ->
         axes << 'org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis'() {
@@ -106,10 +125,18 @@ def genMatrixPython() {
           ignoreOffline 'true'
         }
       }
-      text('VirtEnv', '2.7.11 analysis_2.7.11 hacking bandit tox flake8-junit-report pep8-naming,2.7.11 aws boto3,2.7.11 jjb jenkins-job-builder')
+      text('VirtEnv',
+'''2.7.11 analysis_2.7.11 hacking bandit tox flake8-junit-report pep8-naming
+2.7.11 aws boto3
+2.7.11 jjb jenkins-job-builder
+''')
+    }
+    properties {
+      customIcon('tools.png')
     }
     //triggers {}
     steps {
+      // TODO: ?? move Python setup into this job
       shell('''
 set +x
 # Setup property file are parameters
@@ -123,8 +150,13 @@ echo "venv=${envArr[1]}" >> ${propFile}
 echo "pkgs=${envArr[@]:2}" >> ${propFile}''')
       downstreamParameterized {
         trigger('Tool-Python') {
+          block {
+            buildStepFailure('FAILURE')
+            failure('FAILURE')
+            unstable('UNSTABLE')
+          }
           parameters {
-            propertiesFile('parameters.properties')
+            propertiesFile('parameters.properties', true)
           }
         }
       }
@@ -138,6 +170,7 @@ echo "pkgs=${envArr[@]:2}" >> ${propFile}''')
       // inject-home ?
     }
   }
+  genInjectHome(jobM)
   genLogRotator(jobM,10,5)
   genPragmaticProgrammer(jobM)
 }
