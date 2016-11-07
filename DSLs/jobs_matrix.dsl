@@ -117,11 +117,7 @@ def genMatrixTools() {
         runner('DontRun')
         steps {
           downstreamParameterized {
-            trigger('Tool-Python-Setup-Nodes-TEST') {
-            //    parameters {
-            //      propertiesFile('parameters.properties', true)
-            //    }
-            }
+            trigger('Tool-Python-Setup-Nodes-TEST') { }
           }
         }
       }
@@ -164,9 +160,6 @@ def genMatrixPython() {
       cron('H 1 * * *')
     }
     steps {
-      // TODO: ?? move Python setup into this job
-      // Create repo with script, run script
-      // remove downstream job
       environmentVariables {
         propertiesFile('tmp/env.properties')
       }
@@ -178,18 +171,6 @@ envArr=( ${VirtEnv} )
 #echo "pkgs=${envArr[@]:2}" >> ${propFile}
 env | sort
 tool-python-setup-new.sh -v ${envArr[0]} -e ${envArr[1]} -p "${envArr[@]:2}"''')
-      //downstreamParameterized {
-      //  trigger('Tool-Python') {
-      //    block {
-      //      buildStepFailure('FAILURE')
-      //      failure('FAILURE')
-      //      unstable('UNSTABLE')
-      //    }
-      //    parameters {
-      //      propertiesFile('parameters.properties', true)
-      //    }
-      //  }
-      //}
     }
     wrappers {
       timeout {
