@@ -25,9 +25,11 @@ else
   HOME=${WORKSPACE%%/workspace*}
 fi
 PATH=${PATH}:${HOME}/bin
-XX='test'
-XXe='test2'
-export HOME PATH XXe''')
+dirTmp='tmp'
+envVars="${dirTmp}/env.properties"
+mkdir -p tmp
+echo "HOME=${HOME}" > ${envVars}
+echo "PATH=${PATH}" >> ${envVars}''')
       }
     }
   }
@@ -141,6 +143,9 @@ def genMatrixPython() {
       // TODO: ?? move Python setup into this job
       // Create repo with script, run script
       // remove downstream job
+      environmentVariables {
+        propertiesFile('tmp/env.properties')
+      }
       shell('''
 #set +x
 # Setup property file are parameters
