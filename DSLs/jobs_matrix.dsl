@@ -24,7 +24,10 @@ else
   # Jenkins build slave
   HOME=${WORKSPACE%%/workspace*}
 fi
-PATH=${PATH}:${HOME}/bin''')
+PATH=${PATH}:${HOME}/bin
+XX='test'
+XXe='test2'
+export HOME PATH XXe''')
       }
     }
   }
