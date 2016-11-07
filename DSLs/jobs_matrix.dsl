@@ -118,11 +118,6 @@ def genMatrixTools() {
         steps {
           downstreamParameterized {
             trigger('Tool-Python-Setup-Nodes-TEST') {
-              block {
-                buildStepFailure('FAILURE')
-                failure('FAILURE')
-                unstable('UNSTABLE')
-              }
             //    parameters {
             //      propertiesFile('parameters.properties', true)
             //    }
