@@ -161,7 +161,7 @@ def genMatrixPython() {
       customIcon('tools.png')
     }
     triggers {
-      cron('@daily')
+      cron('H 1 * * *')
     }
     steps {
       // TODO: ?? move Python setup into this job
