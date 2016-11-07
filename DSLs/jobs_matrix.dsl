@@ -149,7 +149,8 @@ envArr=( ${VirtEnv} )
 #echo "python_ver=${envArr[0]}" >> ${propFile}
 #echo "venv=${envArr[1]}" >> ${propFile}
 #echo "pkgs=${envArr[@]:2}" >> ${propFile}
-$HOME/tool-python-setup-new.sh -v ${envArr[0]} -e ${envArr[1]} -p "${envArr[@]:2}"''')
+env | sort
+tool-python-setup-new.sh -v ${envArr[0]} -e ${envArr[1]} -p "${envArr[@]:2}"''')
       //downstreamParameterized {
       //  trigger('Tool-Python') {
       //    block {
