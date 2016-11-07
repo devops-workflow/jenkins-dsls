@@ -117,7 +117,7 @@ def genMatrixTools() {
         runner('DontRun')
         steps {
           downstreamParameterized {
-            trigger('Tool-Python-Setup-Nodes-TEST') { }
+            trigger('Tool-Python-Setup-Nodes') { }
           }
         }
       }
@@ -136,7 +136,7 @@ def genMatrixTools() {
 }
 
 def genMatrixPython() {
-  def jobM = matrixJob('Tool-Python-Setup-Nodes-TEST') {
+  def jobM = matrixJob('Tool-Python-Setup-Nodes') {
     description('Setup Python virtual environments on all nodes')
     quietPeriod(15)
     axes {
