@@ -168,16 +168,17 @@ def genMatrixPython() {
 envArr=( ${VirtEnv} )
 propFile=tmp/job.properties
 echo "python_ver=${envArr[0]}" > ${propFile}
-echo "venv=${envArr[1]}" >> ${propFile}
-echo "pkgs=${envArr[@]:2}" >> ${propFile}
+echo "LabelName=python-${envArr[1]}" >> ${propFile}
+#echo "pkgs=${envArr[@]:2}" >> ${propFile}
 env | sort
 tool-python-setup-new.sh -v ${envArr[0]} -e ${envArr[1]} -p "${envArr[@]:2}"''')
       environmentVariables {
         propertiesFile('tmp/job.properties')
       }
       systemGroovyScriptFile('${HOME}/bin/label-updater.groovy') {
-        binding('NodeToUpdate', '${NODE_NAME}')
-        binding('LabelName', 'python-${venv}')
+        // Plugin doesn't support build env variables
+        binding('NodeToUpdate', 'ENV')
+        binding('LabelName', 'ENV')
         binding('DesiredState', 'true')
       }
     }
