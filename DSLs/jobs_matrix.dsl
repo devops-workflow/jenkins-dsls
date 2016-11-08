@@ -166,7 +166,7 @@ def genMatrixPython() {
       shell('''#set +x
 # FIX: This method limits the number of packages due to file name length (axes)
 envArr=( ${VirtEnv} )
-propFile=tmp/job.properties
+propFile='tmp/job.properties'
 echo "python_ver=${envArr[0]}" > ${propFile}
 echo "LabelName=python-${envArr[1]}" >> ${propFile}
 #echo "pkgs=${envArr[@]:2}" >> ${propFile}
