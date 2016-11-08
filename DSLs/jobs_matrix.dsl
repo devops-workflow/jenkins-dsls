@@ -166,11 +166,20 @@ def genMatrixPython() {
       shell('''#set +x
 # FIX: This method limits the number of packages due to file name length (axes)
 envArr=( ${VirtEnv} )
-#echo "python_ver=${envArr[0]}" >> ${propFile}
-#echo "venv=${envArr[1]}" >> ${propFile}
-#echo "pkgs=${envArr[@]:2}" >> ${propFile}
+propFile=tmp/job.properties
+echo "python_ver=${envArr[0]}" > ${propFile}
+echo "venv=${envArr[1]}" >> ${propFile}
+echo "pkgs=${envArr[@]:2}" >> ${propFile}
 env | sort
 tool-python-setup-new.sh -v ${envArr[0]} -e ${envArr[1]} -p "${envArr[@]:2}"''')
+      environmentVariables {
+        propertiesFile('tmp/job.properties')
+      }
+      systemGroovyScriptFile('${HOME}/bin/label-updater.groovy') {
+        binding('NodeToUpdate', '${NODE_NAME}')
+        binding('LabelName', 'python-${venv}')
+        binding('DesiredState', 'true')
+      }
     }
     wrappers {
       timeout {
