@@ -19,16 +19,17 @@ def genInjectHome(jobInst) {
 '''if [ -d "${JENKINS_HOME}" ]; then
   # or [ "${NODE_NAME}" = "master" ]
   # Jenkins master
-  HOME=${JENKINS_HOME}
+  NODE_HOME=${JENKINS_HOME}
 else
   # Jenkins build slave
-  HOME=${WORKSPACE%%/workspace*}
+  NODE_HOME=${WORKSPACE%%/workspace*}
 fi
-PATH=${PATH}:${HOME}/bin
+PATH=${PATH}:${NODE_HOME}/bin
 dirTmp='tmp'
 envVars="${dirTmp}/env.properties"
 mkdir -p ${dirTmp}
-echo "HOME=${HOME}" > ${envVars}
+echo "NODE_HOME=${NODE_HOME}" > ${envVars}
+echo "HOME=${WORKSPACE}" >> ${envVars}
 echo "PATH=${PATH}" >> ${envVars}''')
       }
     }
@@ -143,14 +144,26 @@ def genMatrixPython() {
       configure { axes ->
         axes << 'org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis'() {
           name 'label'
-          label '!master'
+          label 'GenericLinux'
           ignoreOffline 'true'
         }
       }
+      // TODO: change to just version and env name. Use a mapping file to get packages for the env. Fixing issue with short length of axis
       text('VirtEnv', [
         '2.7.11 analysis_2.7.11 hacking bandit tox flake8-junit-report pep8-naming',
         '2.7.11 aws boto3',
-        '2.7.11 jjb jenkins-job-builder'
+        '2.7.11 aws-cli awscli',
+        '2.7.8 jjb jenkins-job-builder',
+        '2.7.11 gitlab python-gitlab',
+        '3.3.0 pytest-3.3.0 beautifulsoup4 lxml requests xmlrunner',
+        '2.6.9 ptest-2.6.9 beautifulsoup4 crypto lxml MySQL-python paramiko pycurl pymssql requests xmltodict',
+        '3.4.0 pytest-3.4.0 pytest pytest-html requests',
+        '3.6.1 pytest-3.6.1 pytest pytest-html requests bzt locustio==0.8a2'
+        // Needs:
+        // TODO: Add ptest 2.x env
+        // Need to change script to support multiple package args
+        // , failed
+        // " failed"
       ])
     }
     properties {
@@ -170,12 +183,17 @@ propFile='tmp/job.properties'
 echo "python_ver=${envArr[0]}" > ${propFile}
 echo "LabelName=python-${envArr[1]}" >> ${propFile}
 #echo "pkgs=${envArr[@]:2}" >> ${propFile}
-env | sort
-tool-python-setup-new.sh -v ${envArr[0]} -e ${envArr[1]} -p "${envArr[@]:2}"''')
+pkgArgs=''
+pkgs="${envArr[@]:2}"
+for pkg in $pkgs; do
+  pkgArgs="${pkgArgs} -p ${pkg}"
+done
+#env | sort
+tool-python-setup-new.sh -v ${envArr[0]} -e ${envArr[1]} ${pkgArgs} ''')
       environmentVariables {
         propertiesFile('tmp/job.properties')
       }
-      systemGroovyScriptFile('${HOME}/bin/label-updater.groovy') {
+      systemGroovyScriptFile('${NODE_HOME}/bin/label-updater.groovy') {
         // Plugin doesn't support build env variables
         binding('NodeToUpdate', 'ENV')
         binding('LabelName', 'ENV')

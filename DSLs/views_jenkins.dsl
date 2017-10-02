@@ -1,5 +1,5 @@
-nestedView('Jenkins-DSL') {
-  description('Everything related to Jenkins itself')
+nestedView('Jenkins') {
+  description('Everything related to Jenkins itself and maintaining the environments')
   views {
     listView('Jenkins') {
       description('Jenkins Maintenance Jobs')
@@ -31,7 +31,7 @@ nestedView('Jenkins-DSL') {
       }
     }
     listView('Tools') {
-      description('Jobs for installing testing tools')
+      description('Jobs for installing tools')
       jobs {
         regex('(Test-)?Tools?-.*')
       }
