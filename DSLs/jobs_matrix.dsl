@@ -158,7 +158,7 @@ def genMatrixPython() {
         //'3.3.0 pytest-3.3.0 beautifulsoup4 lxml requests xmlrunner',
         //'2.6.9 ptest-2.6.9 beautifulsoup4 crypto lxml MySQL-python paramiko pycurl pymssql requests xmltodict',
         //'3.4.0 pytest-3.4.0 pytest pytest-html requests',
-        '3.6.3 pytest-3.6.3 pytest pytest-html requests bzt locustio==0.8.1'
+        '3.6.2 pytest-3.6.2 pytest pytest-html requests bzt locustio==0.8.1'
         // Needs:
         // TODO: Add ptest 2.x env
         // Need to change script to support multiple package args
