@@ -144,7 +144,7 @@ def genMatrixPython() {
       configure { axes ->
         axes << 'org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis'() {
           name 'label'
-          label 'GenericLinux'
+          label 'Linux'
           ignoreOffline 'true'
         }
       }
