@@ -150,15 +150,15 @@ def genMatrixPython() {
       }
       // TODO: change to just version and env name. Use a mapping file to get packages for the env. Fixing issue with short length of axis
       text('VirtEnv', [
-        '2.7.11 analysis_2.7.11 hacking bandit tox flake8-junit-report pep8-naming',
-        '2.7.11 aws boto3',
-        '2.7.11 aws-cli awscli',
+        '2.7.14 analysis_2.7.14 hacking bandit tox flake8-junit-report pep8-naming',
+        '2.7.14 aws boto3',
+        '2.7.14 aws-cli awscli',
         '2.7.8 jjb jenkins-job-builder',
-        '2.7.11 gitlab python-gitlab',
-        '3.3.0 pytest-3.3.0 beautifulsoup4 lxml requests xmlrunner',
-        '2.6.9 ptest-2.6.9 beautifulsoup4 crypto lxml MySQL-python paramiko pycurl pymssql requests xmltodict',
-        '3.4.0 pytest-3.4.0 pytest pytest-html requests',
-        '3.6.1 pytest-3.6.1 pytest pytest-html requests bzt locustio==0.8a2'
+        //'2.7.11 gitlab python-gitlab',
+        //'3.3.0 pytest-3.3.0 beautifulsoup4 lxml requests xmlrunner',
+        //'2.6.9 ptest-2.6.9 beautifulsoup4 crypto lxml MySQL-python paramiko pycurl pymssql requests xmltodict',
+        //'3.4.0 pytest-3.4.0 pytest pytest-html requests',
+        '3.6.3 pytest-3.6.3 pytest pytest-html requests bzt locustio==0.8.1'
         // Needs:
         // TODO: Add ptest 2.x env
         // Need to change script to support multiple package args
