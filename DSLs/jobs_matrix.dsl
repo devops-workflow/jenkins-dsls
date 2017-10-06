@@ -153,7 +153,7 @@ def genMatrixPython() {
         '2.7.14 analysis_2.7.14 hacking bandit tox flake8-junit-report pep8-naming',
         '2.7.14 aws boto3',
         '2.7.14 aws-cli awscli',
-        '2.7.14 ansible ansible boto3', // Might need boto instead
+        '2.7.14 ansible ansible boto3 ansible-lint',
         '2.7.8 jjb jenkins-job-builder',
         //'2.7.11 gitlab python-gitlab',
         //'3.3.0 pytest-3.3.0 beautifulsoup4 lxml requests xmlrunner',
