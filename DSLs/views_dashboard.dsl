@@ -1,4 +1,9 @@
-
+/*
+// Pipelines, groupings
+nestedView('Dashboards') {
+  description('')
+  views {
+*/
 dashboardView('Test-dashboard') {
   description('Example Dashboard')
   jobs {
