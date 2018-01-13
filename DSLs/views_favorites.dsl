@@ -3,8 +3,8 @@ listView('Test-Favorites') {
   description('Personal favorite jobs')
   configure { view ->
   //  view / icon(class: 'org.example.MyViewIcon')
-    view / jobFilters(class: 'hudson.views.AllJobsFilter')
-    view / jobFilters(class: 'hudson.plugins.favorite.filter.FavoriteFilter')
+    view / jobs(class: 'hudson.views.AllJobsFilter')
+    view / jobs(class: 'hudson.plugins.favorite.filter.FavoriteFilter')
   }
   /*
   <jobFilters>
