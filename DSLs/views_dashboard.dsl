@@ -39,18 +39,17 @@ dashboardView('Test-dashboard') {
     }
   }
   configure { view ->
-    view / 'rightPortlets' / 'hudson.plugins.cobertura.dashboard.CoverageTablePortlet' {}
+    view / 'rightPortlets' / 'hudson.plugins.cobertura.dashboard.CoverageTablePortlet' {
+      name 'Code Coverages(Cobertura)'
+    }
+    view / 'rightPortlets' / 'hudson.plugins.projectstats.portlet.NumBuildsPortlet' {
+      name 'Project: Number of builds'
+    }
   }
   rightPortlets {
     buildStatistics {
-      displayName('Build Statistics - Project: Number of builds')
+      displayName('Build Statistics')
     }
   }
-  /*<rightPortlets>
-    <hudson.plugins.cobertura.dashboard.CoverageTablePortlet plugin="cobertura@1.12">
-      <id>dashboard_portlet_22289</id>
-      <name>Code Coverages(Cobertura)</name>
-    </hudson.plugins.cobertura.dashboard.CoverageTablePortlet>
-  </rightPortlets>*/
   // bottomPortlets {}
 }
