@@ -1,5 +1,5 @@
 
-listView('Test-Favorites') {
+listView('Favorites') {
   description('Personal favorite jobs')
   configure { view ->
     view / 'jobFilters' / 'hudson.views.AllJobsFilter' {}
