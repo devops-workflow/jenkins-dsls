@@ -34,8 +34,8 @@ dashboardView('Test-dashboard') {
     testTrendChart {
       displayName('Test Trend Chart')
       displayStatus(DisplayStatus.ALL)
-      graphHeight('220')
-      graphWidth('300')
+      graphHeight(220)
+      graphWidth(300)
     }
   }
   configure { view ->
