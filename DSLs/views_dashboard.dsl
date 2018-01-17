@@ -50,6 +50,34 @@ dashboardView('Test-dashboard') {
     view / 'rightPortlets' / 'hudson.plugins.projectstats.portlet.NumBuildsPortlet' {
       name 'Project: Number of builds'
     }
+    view / 'rightPortlets' / 'hudson.plugins.checkstyle.dashboard.WarningsTablePortlet' {
+      name 'Checkstyle warnings per project'
+      canHideZeroWarningsProjects false
+    }
+    view / 'rightPortlets' / 'hudson.plugins.checkstyle.dashboard.WarningsNewVersusFixedGraphPortlet' {
+      name 'Checkstyle warnings trend graph (new vs. fixed)'
+      width 500
+      height 200
+      dayCountString 30
+    }
+    view / 'rightPortlets' / 'hudson.plugins.checkstyle.dashboard.WarningsUserGraphPortlet' {
+      name 'Checkstyle warnings (priority per author)'
+      width 500
+      height 200
+      dayCountString 30
+    }
+    view / 'rightPortlets' / 'hudson.plugins.checkstyle.dashboard.WarningsPriorityGraphPortlet' {
+      name 'Checkstyle warnings trend graph (priority distribution)'
+      width 500
+      height 200
+      dayCountString 30
+    }
+    view / 'rightPortlets' / 'hudson.plugins.checkstyle.dashboard.WarningsTotalsGraphPortlet' {
+      name 'Checkstyle warnings trend graph (totals)'
+      width 500
+      height 200
+      dayCountString 30
+    }
   }
   rightPortlets {
     buildStatistics {
