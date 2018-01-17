@@ -403,14 +403,24 @@ nestedView('Environments') {
                       }
                       bottomPortlets {}
                       leftPortlets {
-                        buildStatistics {}
+                        buildStatistics {
+                          displayName('Build Statistics')
+                        }
                       }
                       rightPortlets {
-                        testStatisticsGrid {}
-                        testTrendChart {
-                          dateRange(14)
+                        testStatisticsChart{
+                          displayName('Test Statistics Chart')
                         }
-                        testStatisticsChart {}
+                        testStatisticsGrid {
+                          displayName('Test Statistics Grid')
+                        }
+                        testTrendChart {
+                          displayName('Test Trend Chart')
+                          displayStatus(DisplayStatus.ALL)
+                          dateRange(14)
+                          graphHeight(220)
+                          graphWidth(300)
+                        }
                       }
                     }
                   }
@@ -615,14 +625,24 @@ nestedView('Projects') {
                       }
                       bottomPortlets {}
                       leftPortlets {
-                        buildStatistics {}
+                        buildStatistics {
+                          displayName('Build Statistics')
+                        }
                       }
                       rightPortlets {
-                        testStatisticsGrid {}
-                        testTrendChart {
-                          dateRange(14)
+                        testStatisticsChart{
+                          displayName('Test Statistics Chart')
                         }
-                        testStatisticsChart {}
+                        testStatisticsGrid {
+                          displayName('Test Statistics Grid')
+                        }
+                        testTrendChart {
+                          displayName('Test Trend Chart')
+                          displayStatus(DisplayStatus.ALL)
+                          dateRange(14)
+                          graphHeight(220)
+                          graphWidth(300)
+                        }
                       }
                     }
                   }
