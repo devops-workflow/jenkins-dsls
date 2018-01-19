@@ -40,9 +40,11 @@
 // New views: Env tree - env X - functional views
 
 def envDescs = [
+    'CI'      : 'Continuous Integration'
     'Dev01'   : 'Dev01',
     'QA'      : 'QA',
     'Staging' : 'Staging',
+    'Test'    : 'Dev/QA mixed use environment'
     'Prod'    : 'Production'
 ]
 def orgDescs = [
@@ -666,6 +668,12 @@ nestedView('Projects') {
                   // ^${org}${separator}${repo}${separator}QA${separator}Deploy${separator}Terraform${separator}Plan
                   //if (( m = job =~ /^${org}[${separator}](${repo}_analysis_[^_]+).*/ )) {
                   if (( m = job =~ /^${org}[${separator}](${repo}[${separator}](?:QA|Staging|Prod)[${separator}]Deploy[${separator}]Terraform[${separator}]Plan)/ )) {
+                    workflowTitle = m[0][1]
+                  } else {
+                    workflowTitle = repo
+                  }
+                  pipelineView(workflowView, org, workflowTitle, job)
+                  if (( m = job =~ /^${org}[${separator}](${repo}[${separator}](?:CI|QA|Staging|Prod)[${separator}]Analytics[${separator}]CircleCI)/ )) {
                     workflowTitle = m[0][1]
                   } else {
                     workflowTitle = repo
