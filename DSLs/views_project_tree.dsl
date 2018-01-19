@@ -222,7 +222,8 @@ def getPipelineInitialJobs(org, repo, separators, minNameFields) {
     // Find functions that start workflows
     //if (( m = job.name =~ /^${org}-${repo}_analysis.*/ )) {
     // TODO: Build env list from envDescs - Remove hard code in regex
-    if (( m = job.name =~ /^${org}[${separators}]${repo}[${separators}](?:QA|Staging|Prod)[${separators}]Deploy[${separators}]Terraform[${separators}]Plan/ )) {
+    //if (( m = job.name =~ /^${org}[${separators}]${repo}[${separators}](?:CI|QA|Staging|Prod)[${separators}]Deploy[${separators}]Terraform[${separators}]Plan/ )) {
+    if (( m = job.name =~ /^${org}[${separators}]${repo}[${separators}](?:CI|QA|Staging|Prod)[${separators}]Analytics[${separators}]CircleCI/ )) {
       // got job name - org.
       //println "Job Match: ${m[0]}"
       baseNames[m[0]] = 1
@@ -667,12 +668,6 @@ nestedView('Projects') {
                   // TODO: maybe use metadata to tag pipeline starts. Then build from that.
                   // ^${org}${separator}${repo}${separator}QA${separator}Deploy${separator}Terraform${separator}Plan
                   //if (( m = job =~ /^${org}[${separator}](${repo}_analysis_[^_]+).*/ )) {
-                  if (( m = job =~ /^${org}[${separator}](${repo}[${separator}](?:QA|Staging|Prod)[${separator}]Deploy[${separator}]Terraform[${separator}]Plan)/ )) {
-                    workflowTitle = m[0][1]
-                  } else {
-                    workflowTitle = repo
-                  }
-                  pipelineView(workflowView, org, workflowTitle, job)
                   if (( m = job =~ /^${org}[${separator}](${repo}[${separator}](?:CI|QA|Staging|Prod)[${separator}]Analytics[${separator}]CircleCI)/ )) {
                     workflowTitle = m[0][1]
                   } else {
