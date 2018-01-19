@@ -40,11 +40,11 @@
 // New views: Env tree - env X - functional views
 
 def envDescs = [
-    'CI'      : 'Continuous Integration'
+    'CI'      : 'Continuous Integration',
     'Dev01'   : 'Dev01',
     'QA'      : 'QA',
     'Staging' : 'Staging',
-    'Test'    : 'Dev/QA mixed use environment'
+    'Test'    : 'Dev/QA mixed use environment',
     'Prod'    : 'Production'
 ]
 def orgDescs = [
